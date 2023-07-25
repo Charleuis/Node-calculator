@@ -4,8 +4,8 @@ import './Style.scss'
 
 const App  =()=> {
     const [inputNum,setInputNum] = useState(0);
-    const [calclatedNum,setCalulateNum] = useState(0);
-    const [operator,setOperato] = useState('');
+    const [calclatedNum,setCalulatedNum] = useState(0);
+    const [operator,setOperator] = useState('');
     const [isDecimal,setIsDecimal]=useState(false)
     const [decimalCount,setDecimalCount]=useState(1);
     const [monitor,setMonitor] = useState('');
@@ -14,6 +14,11 @@ const App  =()=> {
         setMonitor(inputNum);
     },[inputNum])
 
+    useEffect(()=>{
+      setMonitor(calclatedNum)
+    },[calclatedNum])
+
+    // take input numbers from keyboard 
     const TakeInputNum = (num) => {
         if(isDecimal){
             num=num/Math.pow(10,decimalCount);
@@ -23,40 +28,95 @@ const App  =()=> {
         else setInputNum(inputNum*10+num)
     }
 
+    // take operators from keyboard
+    const TakeOperator = (operator)=>{
+      setOperator(operator);
+      Calculate();
+      setInputNum(0);
+    }
+
+    // For the calculation
+    const Calculate = () =>{
+      setIsDecimal(false);
+      setDecimalCount(1);
+      if(operator == '/' && inputNum == 0){
+        setCalulatedNum(NaN);
+        setInputNum(0);
+        return
+      }
+      if(calclatedNum == 0 && inputNum == 0){
+        return;
+      }
+     switch(operator){
+      case '+':
+        setCalulatedNum(calclatedNum+inputNum);
+        break;
+      case '-':
+        setCalulatedNum(calclatedNum-inputNum);
+        break;
+      case '*':
+        setCalulatedNum(calclatedNum*inputNum);
+        break;
+      case '/':
+        setCalulatedNum(calclatedNum/inputNum);
+        break;
+     } 
+     if(operator == ''){
+      setCalulatedNum(inputNum)
+     }else{
+      setInputNum(0);
+     }
+     return;
+    }
+
+    //get the equation
+    const GetEqual = () =>{
+      Calculate();
+      setOperator('');
+    }
+
+    //clear all
+    const Clear =()=>{
+      setInputNum(0)
+      setCalulatedNum(0)
+      setMonitor('')
+      setOperator('')
+    }
+
   return (
     <div className='calculator'>
         <section className='monitor'> 
-        <p className='out-put'>0</p>
+        <p className='out-put'>{monitor}</p>
         </section>
       <section className='keyboard'>
         <div className='keyboard-row'>
-        <button className='one-block blue'> AC</button>
+        <button onClick={()=>{Clear()}} className='one-block blue'> AC</button>
         <button className='one-block blue'> -/+</button>
         <button className='one-block blue'> %</button>
-        <button className='one-block red'> /</button>
+        <button  onClick={()=>{TakeOperator('/')}} className='one-block red'> /</button>
         </div>
         <div className='keyboard-row'>
         <button onClick={()=>{TakeInputNum(7)}} className='one-block'>7</button>
         <button onClick={()=>{TakeInputNum(8)}} className='one-block'>8</button>
         <button onClick={()=>{TakeInputNum(9)}} className='one-block'>9</button>
-        <button className='one-block red'> *</button>
+        <button onClick={()=>{TakeOperator('*')}} className='one-block red'> *</button>
         </div>
         <div className='keyboard-row'>
         <button onClick={()=>{TakeInputNum(4)}} className='one-block'>4</button>
         <button onClick={()=>{TakeInputNum(5)}} className='one-block'>5</button>
         <button onClick={()=>{TakeInputNum(6)}} className='one-block'>6</button>
-        <button className='one-block red'> -</button>
+        <button  onClick={()=>{TakeOperator('-')}} className='one-block red'> -</button>
         </div>
         <div className='keyboard-row'>
         <button onClick={()=>{TakeInputNum(1)}} className='one-block'>1</button>
         <button onClick={()=>{TakeInputNum(2)}} className='one-block'>2</button>
         <button onClick={()=>{TakeInputNum(3)}} className='one-block'>3</button>
-        <button className='one-block red'>+</button>
+        <button  onClick={()=>{TakeOperator('+')}} className='one-block red'>+</button>
         </div>
         <div className='keyboard-row'>
         <button onClick={()=>{TakeInputNum(0)}} className='two-block'>0</button>
-        <button className='one-block'> .</button>
-        <button className='one-block red'> =</button>
+        <button onClick={()=>{setIsDecimal(true)}} className='one-block'> .</button>
+        <button onClick={()=>{GetEqual()}} className='one-block red'> =</button>
         </div>
       </section>
     </div>
