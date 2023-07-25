@@ -3,6 +3,23 @@
 *{
     font-family: 'Poppins';
     font-size: 23px;
+    color: white;
+}
+
+button{
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px 0 rgb(0,0,0,0.5);
+}
+
+.red{
+    color: rgb(255, 94, 118);
+}
+
+.blue{
+color: rgb(100, 219, 255);
 }
 
 .calculator{
@@ -10,12 +27,27 @@
     height: 600px;
     margin: 35% auto;
     background-color: rgb(24, 24, 24);
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0px,5px,10px,0px rgb(0, 0, 0,0.5);
+}
+
+.monitor{
+    .out-put{
+        text-align: right;
+        font-size: 2.5rem;
+        margin: 80px 30px 0px;
+    }
 }
 
 .keyboard{
     display: flex;
     flex-direction: column;
+    background:rgb(36, 36, 36);
     gap: 15px;
+    padding: 20px;
 }
 .keyboard-row{
     display: flex;

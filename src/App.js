@@ -2,7 +2,7 @@ import { unstable_renderSubtreeIntoContainer } from 'react-dom'
 import React, {useState, useEffect } from 'react'
 import './Style.scss'
 
-const App=()=> {
+const App  =()=> {
     const [inputNum,setInputNum] = useState(0);
     const [calclatedNum,setCalulateNum] = useState(0);
     const [operator,setOperato] = useState('');
@@ -30,22 +30,22 @@ const App=()=> {
         </section>
       <section className='keyboard'>
         <div className='keyboard-row'>
-        <button className='one-block blue'>AC</button>
+        <button className='one-block blue'> AC</button>
         <button className='one-block blue'> -/+</button>
         <button className='one-block blue'> %</button>
-        <button className='one-block red'>/</button>
+        <button className='one-block red'> /</button>
         </div>
         <div className='keyboard-row'>
         <button onClick={()=>{TakeInputNum(7)}} className='one-block'>7</button>
         <button onClick={()=>{TakeInputNum(8)}} className='one-block'>8</button>
         <button onClick={()=>{TakeInputNum(9)}} className='one-block'>9</button>
-        <button className='one-block red'>*</button>
+        <button className='one-block red'> *</button>
         </div>
         <div className='keyboard-row'>
         <button onClick={()=>{TakeInputNum(4)}} className='one-block'>4</button>
         <button onClick={()=>{TakeInputNum(5)}} className='one-block'>5</button>
         <button onClick={()=>{TakeInputNum(6)}} className='one-block'>6</button>
-        <button className='one-block red'>-</button>
+        <button className='one-block red'> -</button>
         </div>
         <div className='keyboard-row'>
         <button onClick={()=>{TakeInputNum(1)}} className='one-block'>1</button>
@@ -54,7 +54,7 @@ const App=()=> {
         <button className='one-block red'>+</button>
         </div>
         <div className='keyboard-row'>
-        <button onClick={()=>{TakeInputNum(0)}} className='one-block'>0</button>
+        <button onClick={()=>{TakeInputNum(0)}} className='two-block'>0</button>
         <button className='one-block'> .</button>
         <button className='one-block red'> =</button>
         </div>
